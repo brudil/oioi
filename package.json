@@ -1,0 +1,21 @@
+{
+  "name": "oioi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "binaryen": "^51.0.0",
+    "nearley": "^2.15.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.1"
+  },
+  "devDependencies": {
+    "@types/nearley": "^2.11.0",
+    "@types/node": "^10.11.4",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.3"
+  },
+  "scripts": {
+    "cg": "nearleyc src/grammar.ne -o src/generated/grammar.js"
+  }
+}
