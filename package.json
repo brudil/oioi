@@ -5,17 +5,22 @@
   "license": "MIT",
   "dependencies": {
     "binaryen": "^51.0.0",
+    "moo": "^0.4.3",
     "nearley": "^2.15.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.1"
   },
   "devDependencies": {
+    "@types/moo": "^0.4.1",
     "@types/nearley": "^2.11.0",
     "@types/node": "^10.11.4",
     "jest": "^23.6.0",
     "ts-jest": "^23.10.3"
   },
   "scripts": {
-    "cg": "nearleyc src/grammar.ne -o src/generated/grammar.js"
+    "gg": "./scripts/generate-grammar.sh",
+    "gtest": "nearley-test src/generated/grammar.js",
+    "gdi": "nearley-railroad src/generated/grammar.js -o src/generated/grammar.html",
+    "gun": "nearley-unparse src/generated/grammar.js"
   }
 }
