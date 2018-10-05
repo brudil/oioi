@@ -11,7 +11,7 @@ Imports -> Import:*
 Statement -> Assignment
 
 Assignment -> "let" __ Name __ "=" __ Exp
-Import -> "use" __ Name __ "as" __ Name "\n" {% (d) => ({"type": "IMPORT", package: d[2], imported: d[6] }) %}
+Import -> "use" __ Name __ "as" __ Name __ "\n" {% (d) => ({"type": "IMPORT", package: d[2], imported: d[6] }) %}
 
 
 Name -> _name {% function(d) {return {'name': d[0]}; } %}

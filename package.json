@@ -11,9 +11,11 @@
     "typescript": "^3.1.1"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.3",
     "@types/moo": "^0.4.1",
     "@types/nearley": "^2.11.0",
     "@types/node": "^10.11.4",
+    "fast-glob": "^2.2.3",
     "jest": "^23.6.0",
     "ts-jest": "^23.10.3"
   },
@@ -21,6 +23,34 @@
     "gg": "./scripts/generate-grammar.sh",
     "gtest": "nearley-test src/generated/grammar.js",
     "gdi": "nearley-railroad src/generated/grammar.js -o src/generated/grammar.html",
-    "gun": "nearley-unparse src/generated/grammar.js"
+    "gun": "nearley-unparse src/generated/grammar.js",
+    "test": "jest"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "testPathIgnorePatterns": [
+      "<rootDir>/(build|docs|node_modules)/"
+    ],
+    "testEnvironment": "node",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.{svg,d.ts,stories.tsx}",
+      "!src/projects/app/**/*"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest",
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json",
+      "node"
+    ]
   }
 }
