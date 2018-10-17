@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`simple-arithmetic 1`] = `
+"(module
+ (type $fntype (func))
+ (func $rah (; 0 ;) (type $fntype)
+  (local $0 i32)
+  (block $rah2
+   (set_local $2
+    (i32.add
+     (get_local $0)
+     (get_local $1)
+    )
+   )
+   (return
+    (get_local $2)
+   )
+  )
+ )
+)
+"
+`;
+
+exports[`simple-function 1`] = `
+"(module
+ (type $fntype (func))
+ (func $rah (; 0 ;) (type $fntype)
+  (local $0 i32)
+  (block $rah2
+   (set_local $2
+    (i32.add
+     (get_local $0)
+     (get_local $1)
+    )
+   )
+   (return
+    (get_local $2)
+   )
+  )
+ )
+)
+"
+`;

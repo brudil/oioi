@@ -1,38 +1,38 @@
+@{%
+  const lexer = require('../lexer.ts');
+
+  const empty = () => null;
+
+  const p = require('../producers.ts');
+%}
+
 @preprocessor typescript
+@lexer lexer
 
-Main -> Imports | XmlComponent
+Main -> Statement:+ {% d => ({ program: d }) %}
 
-Blocks -> Blocks | _Block
+Statement -> Expression | Fn | Newlines {% d => p.createStatement(d[0]) %}
 
-_Block -> Statement
+Expression -> Integer _ %OP  _ Integer {% d => ({"lhs": d[0], "rhs": d[4], "operator": d[2].value }) %}
 
-Imports -> Import:*
+Fn -> "fn" __ Identifier _ Block {% d => p.createFunction({ identifier: d[2], body: d[4] }) %}
 
-Statement -> Assignment
+Params -> null | Param | Params _ " " Param {% d => ({ "type": "params", d }) %}
 
-Assignment -> "let" __ Name __ "=" __ Exp
-Import -> "use" __ Name __ "as" __ Name __ "\n" {% (d) => ({"type": "IMPORT", package: d[2], imported: d[6] }) %}
+Block -> %LBRACE _ Body _ %RBRACE {% d => d[2] %}
 
+Body -> Statement:+ | null {% d => d %}
 
-Name -> _name {% function(d) {return {'name': d[0]}; } %}
+Param -> Integer
 
-_name -> [a-zA-Z_] {% id %}
-	| _name [\w_] {% function(d) {return d[0] + d[1]; } %}
+Identifier -> %Ident {% d => p.createIdentifier({ name: d[0].value}) %}
 
-Exp -> [1-9]:+
+Integer -> %number {% p.createInteger %}
 
-String -> Quote 
+_N -> Newlines | _
 
-Quote -> "\"" | "'"
-
-ParenthesExp -> "(" Exp ")"
-
-XmlComponent -> "<" Name __ Attributes ">"
-
-Attributes -> Attributes __ | Attribute
-
-Attribute -> Name "=" "{" Name "}"
+Newlines -> %NL:+ {% empty %}
 
 # Whitespace
-_ -> null | _ [\s] {% () => {} %}
-__ -> [\s] | __ [\s] {% () => {} %}
+_ -> null | %WS {% empty %}
+__ -> %WS | __ %WS {% empty %}

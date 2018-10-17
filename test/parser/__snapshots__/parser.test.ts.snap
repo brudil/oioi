@@ -1,19 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test/parser/imports.oi 1`] = `
-Array [
-  Array [
+exports[`simple-arithmetic 1`] = `
+Object {
+  "program": Array [
     Array [
+      Array [
+        Object {
+          "lhs": 4,
+          "operator": "+",
+          "rhs": 10,
+        },
+      ],
       Object {
-        "imported": Object {
-          "name": "underscore",
+        "body": null,
+        "type": "Statement",
+      },
+      Array [
+        Object {
+          "lhs": 10,
+          "operator": "/",
+          "rhs": 2,
         },
-        "package": Object {
-          "name": "lodash",
+      ],
+      Object {
+        "body": null,
+        "type": "Statement",
+      },
+      Array [
+        Object {
+          "lhs": 50,
+          "operator": "-",
+          "rhs": 4,
         },
-        "type": "IMPORT",
+      ],
+      Object {
+        "body": null,
+        "type": "Statement",
       },
     ],
   ],
-]
+}
+`;
+
+exports[`simple-function 1`] = `
+Object {
+  "program": Array [
+    Array [
+      Array [
+        Object {
+          "body": Array [
+            Array [
+              Array [
+                Object {
+                  "lhs": 4,
+                  "operator": "+",
+                  "rhs": 2,
+                },
+              ],
+            ],
+          ],
+          "identifier": Object {
+            "name": "start",
+            "type": "Identifier",
+          },
+          "type": "FunctionDeclaration",
+        },
+      ],
+      Object {
+        "body": null,
+        "type": "Statement",
+      },
+    ],
+  ],
+}
 `;
